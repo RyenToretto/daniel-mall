@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "streetsidesoftware.code-spell-checker",
+    "vscjava.vscode-java-pack",
+    "EditorConfig.EditorConfig",
+    "antfu.unocss",
+    "antfu.iconify",
+    "csstools.postcss",
+    "lokalise.i18n-ally"
+  ],
+  "unwantedRecommendations": []
+}

@@ -24,3 +24,22 @@ logs
 .env
 .env.local
 .env.*.local
+
+# Community Skills (installed via npx skills add)
+.agents/
+
+# Java build outputs
+target/
+*.class
+*.jar
+
+# IDE
+*.iml
+.idea/
+
+# Test outputs
+coverage/
+.nyc_output/
+
+# Husky
+.husky/_/

@@ -1,0 +1,148 @@
+---
+description: Java21/Spring Boot/MySQL 后端开发规范
+globs: '**/*.java'
+alwaysApply: false
+---
+
+# Java21/Spring Boot 后端开发规范
+
+## 分层架构
+
+```
+domain-server/
+├── src/main/java/com/daniel/mall/
+│   ├── controller/    # 控制器层（REST API）
+│   ├── service/       # 业务逻辑层
+│   │   └── impl/      # 服务实现
+│   ├── repository/    # 数据访问层
+│   ├── entity/        # 实体类
+│   ├── dto/           # 数据传输对象
+│   ├── vo/            # 视图对象
+│   ├── config/        # 配置类
+│   ├── exception/     # 自定义异常
+│   └── util/          # 工具类
+└── src/main/resources/
+    ├── mapper/        # MyBatis 映射文件
+    └── application.yml
+```
+
+## Controller 规范
+
+```java
+@RestController
+@RequestMapping("/api/v1/tools")
+@RequiredArgsConstructor
+public class ToolController {
+
+    private final ToolService toolService;
+
+    @GetMapping
+    public Result<PageVO<ToolVO>> list(
+            @RequestParam(defaultValue = "1") Integer page,
+            @RequestParam(defaultValue = "10") Integer size) {
+        return Result.success(toolService.list(page, size));
+    }
+
+    @GetMapping("/{id}")
+    public Result<ToolVO> getById(@PathVariable Long id) {
+        return Result.success(toolService.getById(id));
+    }
+
+    @PostMapping("/{id}/execute")
+    public Result<ToolExecuteVO> execute(
+            @PathVariable Long id,
+            @RequestBody @Valid ToolExecuteDTO dto) {
+        return Result.success(toolService.execute(id, dto));
+    }
+}
+```
+
+## 统一响应格式
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Result<T> {
+    private Integer code;
+    private String message;
+    private T data;
+    private Long timestamp;
+
+    public static <T> Result<T> success(T data) {
+        return new Result<>(200, "success", data, System.currentTimeMillis());
+    }
+
+    public static <T> Result<T> error(Integer code, String message) {
+        return new Result<>(code, message, null, System.currentTimeMillis());
+    }
+}
+```
+
+## 全局异常处理
+
+```java
+@RestControllerAdvice
+@Slf4j
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(BusinessException.class)
+    public Result<Void> handleBusinessException(BusinessException e) {
+        log.warn("业务异常: {}", e.getMessage());
+        return Result.error(e.getCode(), e.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public Result<Void> handleException(Exception e) {
+        log.error("系统异常", e);
+        return Result.error(500, "系统繁忙，请稍后重试");
+    }
+}
+```
+
+## MySQL 命名规范
+
+```sql
+-- 表名：dm_ 前缀 + snake_case
+CREATE TABLE dm_user (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    anonymous_id VARCHAR(64) NOT NULL COMMENT '匿名ID',
+    email VARCHAR(128) COMMENT '邮箱',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at DATETIME COMMENT '软删除时间',
+
+    UNIQUE KEY uk_anonymous_id (anonymous_id),
+    KEY idx_email (email)
+) COMMENT='用户表';
+
+-- 字段规范
+-- id: BIGINT 自增主键
+-- *_id: 外键字段
+-- *_at: 时间字段
+-- is_*: 布尔字段
+-- *_count: 计数字段
+```
+
+## Java 21 新特性使用
+
+```java
+// ✅ Record 类型（DTO/VO）
+public record UserVO(
+    Long id,
+    String name,
+    String email
+) {}
+
+// ✅ 模式匹配
+if (obj instanceof String s && !s.isEmpty()) {
+    // 直接使用 s
+}
+
+// ✅ Switch 表达式
+String result = switch (status) {
+    case ACTIVE -> "激活";
+    case DISABLED -> "禁用";
+    default -> "未知";
+};
+```

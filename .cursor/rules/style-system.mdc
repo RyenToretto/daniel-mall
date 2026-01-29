@@ -1,0 +1,151 @@
+---
+description: 样式系统规范 - CSS变量、TailwindCSS、三主题系统
+globs: '**/*.{scss,css,vue}'
+alwaysApply: false
+---
+
+# 样式系统规范
+
+## 基础约束
+
+- `html { font-size: 16px; }` 固定不变
+- 使用 CSS 变量实现主题切换
+- 变量前缀统一使用 `--dm-`
+
+## 三主题系统
+
+```scss
+// 主题类名
+.theme-light {
+  /* 亮色主题 */
+}
+.theme-dark {
+  /* 暗色主题 */
+}
+.theme-hero {
+  /* Hero主题（默认） */
+}
+```
+
+## CSS 变量命名规范
+
+```scss
+:root {
+  // 颜色
+  --dm-color-primary: #c89b3c;
+  --dm-color-primary-hover: #f0e6d3;
+  --dm-color-secondary: #0a323c;
+  --dm-color-background: #010a13;
+  --dm-color-surface: #1e2328;
+  --dm-color-text: #f0e6d3;
+  --dm-color-text-secondary: #a09b8c;
+
+  // 间距
+  --dm-spacing-xs: 4px;
+  --dm-spacing-sm: 8px;
+  --dm-spacing-md: 16px;
+  --dm-spacing-lg: 24px;
+  --dm-spacing-xl: 32px;
+
+  // 圆角
+  --dm-radius-sm: 4px;
+  --dm-radius-md: 8px;
+  --dm-radius-lg: 12px;
+
+  // 阴影
+  --dm-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --dm-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.4);
+  --dm-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.5);
+
+  // 字体
+  --dm-font-family: 'Inter', system-ui, sans-serif;
+  --dm-font-size-xs: 12px;
+  --dm-font-size-sm: 14px;
+  --dm-font-size-md: 16px;
+  --dm-font-size-lg: 18px;
+  --dm-font-size-xl: 24px;
+}
+```
+
+## TailwindCSS 配置扩展
+
+```javascript
+// tailwind.config.js
+export default {
+  theme: {
+    extend: {
+      colors: {
+        dm: {
+          primary: 'var(--dm-color-primary)',
+          secondary: 'var(--dm-color-secondary)',
+          background: 'var(--dm-color-background)',
+          surface: 'var(--dm-color-surface)',
+        },
+      },
+      spacing: {
+        'dm-xs': 'var(--dm-spacing-xs)',
+        'dm-sm': 'var(--dm-spacing-sm)',
+        'dm-md': 'var(--dm-spacing-md)',
+      },
+    },
+  },
+}
+```
+
+## Hero 主题配色（英雄联盟风格）
+
+```scss
+.theme-hero {
+  // 金色主色调
+  --dm-color-primary: #c89b3c;
+  --dm-color-primary-light: #f0e6d3;
+  --dm-color-primary-dark: #785a28;
+
+  // 深蓝背景
+  --dm-color-background: #010a13;
+  --dm-color-surface: #1e2328;
+  --dm-color-surface-elevated: #3c3c41;
+
+  // 边框发光效果
+  --dm-border-glow: 0 0 10px rgba(200, 155, 60, 0.3);
+
+  // 渐变
+  --dm-gradient-gold: linear-gradient(180deg, #f0e6d3 0%, #c89b3c 100%);
+  --dm-gradient-dark: linear-gradient(180deg, #1e2328 0%, #010a13 100%);
+}
+```
+
+## 动画规范
+
+```scss
+// 过渡时间
+--dm-transition-fast: 150ms;
+--dm-transition-normal: 250ms;
+--dm-transition-slow: 400ms;
+
+// 缓动函数
+--dm-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+--dm-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+// 阴影动画必须平滑
+.element {
+  transition: box-shadow var(--dm-transition-normal) var(--dm-ease-out);
+}
+```
+
+## 响应式断点
+
+```scss
+// 移动优先
+$breakpoints: (
+  'sm': 640px,
+  // 手机横屏
+  'md': 768px,
+  // 平板
+  'lg': 1024px,
+  // 小桌面
+  'xl': 1280px,
+  // 桌面
+  '2xl': 1536px, // 大桌面
+);
+```

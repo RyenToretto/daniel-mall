@@ -1,0 +1,52 @@
+---
+description: Daniel Mall 项目全局规则 - 适用于所有文件的通用约束
+alwaysApply: true
+---
+
+# Daniel Mall 项目全局规则
+
+## 项目概述
+
+面向电商客服的工具订阅平台（Service as Tools），核心是工具中心，内容为辅。
+
+## 技术栈
+
+- **前端**: Vue3 + TypeScript + SCSS + TailwindCSS + Nuxt4
+- **后端**: Java 21 + Spring Boot + MySQL
+- **组件库**: kv-ui（自研）
+- **工具库**: ku-utils（自研）
+
+## 项目结构约束
+
+```
+daniel-mall/
+├── ku-utils/        # 通用函数库（npm 包）
+├── kv-ui/           # Vue UI 组件库（npm 包）
+├── daniel-web/      # 前端 Web 项目（Nuxt4）
+├── domain-cms/      # 领域模型
+├── domain-server/   # 后端服务（Spring Boot）
+└── docs/            # 产品 & 技术文档
+```
+
+## 命名规范
+
+- **文件**: kebab-case（如 `user-service.ts`）
+- **Vue 组件**: PascalCase（如 `UserCard.vue`）
+- **CSS 变量**: `--dm-*` 前缀（如 `--dm-color-primary`）
+- **Java 类**: PascalCase
+- **数据库表**: snake*case，前缀 `dm*`
+
+## 禁止事项
+
+- ❌ 不创建无用的测试文件或示例文件
+- ❌ 不修改 .gitignore 中的核心配置
+- ❌ 不在代码中硬编码敏感信息
+- ❌ 不使用 `any` 类型（TypeScript）
+- ❌ 不跳过 ESLint 规则检查
+
+## 必须遵守
+
+- ✅ 所有注释使用中文
+- ✅ Commit 信息遵循 Conventional Commits
+- ✅ 新增功能必须有对应文档说明
+- ✅ API 变更必须同步更新文档

@@ -1,0 +1,148 @@
+---
+description: kv-ui 组件库开发规范
+globs: '**/kv-ui/**'
+alwaysApply: false
+---
+
+# kv-ui 组件库开发规范
+
+## 组件结构
+
+```
+kv-ui/
+├── packages/
+│   └── components/
+│       ├── button/
+│       │   ├── src/
+│       │   │   ├── Button.vue
+│       │   │   ├── button.ts      # 类型定义
+│       │   │   └── button.scss
+│       │   └── index.ts           # 导出
+│       └── index.ts               # 统一导出
+├── docs/                          # 组件文档
+└── package.json
+```
+
+## 组件模板
+
+```vue
+<!-- Button.vue -->
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { ButtonProps, ButtonEmits } from './button'
+
+defineOptions({
+  name: 'KvButton',
+})
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  type: 'default',
+  size: 'md',
+  disabled: false,
+  loading: false,
+})
+
+const emit = defineEmits<ButtonEmits>()
+
+const classes = computed(() => [
+  'kv-button',
+  `kv-button--${props.type}`,
+  `kv-button--${props.size}`,
+  {
+    'kv-button--disabled': props.disabled,
+    'kv-button--loading': props.loading,
+  },
+])
+
+const handleClick = (e: MouseEvent) => {
+  if (props.disabled || props.loading) return
+  emit('click', e)
+}
+</script>
+
+<template>
+  <button :class="classes" :disabled="disabled || loading" @click="handleClick">
+    <span v-if="loading" class="kv-button__loading" />
+    <slot />
+  </button>
+</template>
+
+<style lang="scss" scoped>
+@import './button.scss';
+</style>
+```
+
+## 类型定义
+
+```typescript
+// button.ts
+export interface ButtonProps {
+  type?: 'default' | 'primary' | 'secondary' | 'danger'
+  size?: 'sm' | 'md' | 'lg'
+  disabled?: boolean
+  loading?: boolean
+}
+
+export interface ButtonEmits {
+  (e: 'click', event: MouseEvent): void
+}
+```
+
+## 样式规范
+
+```scss
+// button.scss
+.kv-button {
+  // 使用项目 CSS 变量
+  background: var(--dm-color-surface);
+  color: var(--dm-color-text);
+  border: 1px solid var(--dm-color-primary);
+  border-radius: var(--dm-radius-md);
+  padding: var(--dm-spacing-sm) var(--dm-spacing-md);
+  font-size: var(--dm-font-size-md);
+  cursor: pointer;
+  transition: all var(--dm-transition-fast) var(--dm-ease-out);
+
+  &:hover:not(.kv-button--disabled) {
+    background: var(--dm-color-primary);
+    color: var(--dm-color-background);
+  }
+
+  &--primary {
+    background: var(--dm-color-primary);
+    color: var(--dm-color-background);
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--sm {
+    padding: var(--dm-spacing-xs) var(--dm-spacing-sm);
+  }
+  &--lg {
+    padding: var(--dm-spacing-md) var(--dm-spacing-lg);
+  }
+}
+```
+
+## 组件命名规范
+
+| 类型     | 前缀        | 示例                        |
+| -------- | ----------- | --------------------------- |
+| 组件名   | Kv          | `KvButton`, `KvInput`       |
+| CSS 类名 | kv-         | `.kv-button`, `.kv-input`   |
+| 事件名   | 动词        | `click`, `change`, `update` |
+| Props    | 形容词/名词 | `disabled`, `size`, `type`  |
+
+## 可访问性要求
+
+```vue
+<template>
+  <button :aria-disabled="disabled" :aria-busy="loading" role="button">
+    <span class="sr-only" v-if="loading">加载中</span>
+    <slot />
+  </button>
+</template>
+```
