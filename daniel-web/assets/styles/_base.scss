@@ -1,0 +1,80 @@
+/**
+ * 基础样式
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  line-height: var(--dm-line-height-normal);
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--dm-font-family);
+  font-size: var(--dm-font-size-md);
+  color: var(--dm-color-text);
+  background-color: var(--dm-color-background);
+  min-height: 100vh;
+  transition:
+    background-color var(--dm-transition-slow) var(--dm-ease-in-out),
+    color var(--dm-transition-slow) var(--dm-ease-in-out);
+}
+
+a {
+  color: var(--dm-color-primary);
+  text-decoration: none;
+  transition: color var(--dm-transition-fast);
+
+  &:hover {
+    color: var(--dm-color-primary-hover);
+  }
+}
+
+button {
+  font-family: inherit;
+}
+
+input,
+textarea {
+  font-family: inherit;
+}
+
+// 可访问性
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// 焦点样式
+:focus-visible {
+  outline: 2px solid var(--dm-color-primary);
+  outline-offset: 2px;
+}
+
+// 容器
+.dm-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--dm-spacing-md);
+
+  @media (min-width: 768px) {
+    padding: 0 var(--dm-spacing-lg);
+  }
+}

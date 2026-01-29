@@ -1,0 +1,17 @@
+/**
+ * kv-ui 样式入口
+ */
+
+// 变量和主题
+@import "./variables";
+@import "./themes";
+
+// 基础样式
+@import "./base";
+
+// 组件样式
+@import "../components/button/style";
+@import "../components/input/style";
+@import "../components/card/style";
+@import "../components/modal/style";
+@import "../components/icon/style";

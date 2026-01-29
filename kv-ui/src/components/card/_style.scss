@@ -1,0 +1,121 @@
+/**
+ * Card 组件样式
+ */
+
+.kv-card {
+  position: relative;
+  background: var(--dm-color-surface);
+  border-radius: var(--dm-radius-lg);
+  transition: all var(--dm-transition-normal) var(--dm-ease-out);
+
+  &--bordered {
+    border: 1px solid var(--dm-color-border);
+  }
+
+  &--shadow {
+    box-shadow: var(--dm-shadow-md);
+  }
+
+  &--shadow-hover {
+    &:hover {
+      box-shadow: var(--dm-shadow-lg);
+    }
+  }
+
+  &--hoverable {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--dm-shadow-lg);
+    }
+  }
+
+  // 内边距
+  &--padding-none {
+    .kv-card__header,
+    .kv-card__body,
+    .kv-card__footer {
+      padding: 0;
+    }
+  }
+
+  &--padding-sm {
+    .kv-card__header,
+    .kv-card__body,
+    .kv-card__footer {
+      padding: var(--dm-spacing-sm);
+    }
+  }
+
+  &--padding-md {
+    .kv-card__header,
+    .kv-card__body,
+    .kv-card__footer {
+      padding: var(--dm-spacing-md);
+    }
+  }
+
+  &--padding-lg {
+    .kv-card__header,
+    .kv-card__body,
+    .kv-card__footer {
+      padding: var(--dm-spacing-lg);
+    }
+  }
+
+  // Hero 主题特殊样式
+  .theme-hero & {
+    box-shadow: var(--dm-inner-glow);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--dm-gradient-border);
+      border-radius: var(--dm-radius-lg) var(--dm-radius-lg) 0 0;
+    }
+
+    &--hoverable:hover {
+      box-shadow: var(--dm-glow-gold);
+    }
+  }
+
+  // 头部
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--dm-color-border);
+  }
+
+  &__title {
+    font-size: var(--dm-font-size-lg);
+    font-weight: var(--dm-font-weight-semibold);
+    color: var(--dm-color-text);
+  }
+
+  &__subtitle {
+    margin-top: var(--dm-spacing-xs);
+    font-size: var(--dm-font-size-sm);
+    color: var(--dm-color-text-secondary);
+  }
+
+  &__extra {
+    flex-shrink: 0;
+    margin-left: var(--dm-spacing-md);
+  }
+
+  // 内容
+  &__body {
+    color: var(--dm-color-text);
+  }
+
+  // 底部
+  &__footer {
+    border-top: 1px solid var(--dm-color-border);
+  }
+}

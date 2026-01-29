@@ -1,0 +1,49 @@
+{
+  "name": "@daniel-mall/ku-utils",
+  "version": "0.1.0",
+  "description": "Daniel Mall 通用工具函数库",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build"
+  },
+  "keywords": [
+    "utils",
+    "tools",
+    "daniel-mall"
+  ],
+  "author": "Daniel Mall Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyenToretto/daniel-mall.git",
+    "directory": "ku-utils"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

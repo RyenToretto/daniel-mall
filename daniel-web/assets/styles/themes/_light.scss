@@ -1,0 +1,33 @@
+/**
+ * Light 主题
+ */
+
+.theme-light {
+  --dm-color-primary: #3b82f6;
+  --dm-color-primary-hover: #2563eb;
+  --dm-color-primary-light: #eff6ff;
+  --dm-color-primary-dark: #1d4ed8;
+
+  --dm-color-secondary: #6b7280;
+  --dm-color-secondary-hover: #4b5563;
+
+  --dm-color-background: #ffffff;
+  --dm-color-surface: #f9fafb;
+  --dm-color-surface-elevated: #ffffff;
+
+  --dm-color-border: #e5e7eb;
+  --dm-color-border-light: #f3f4f6;
+
+  --dm-color-text: #111827;
+  --dm-color-text-secondary: #6b7280;
+  --dm-color-text-muted: #9ca3af;
+
+  --dm-color-success: #22c55e;
+  --dm-color-warning: #f59e0b;
+  --dm-color-error: #ef4444;
+  --dm-color-info: #3b82f6;
+
+  --dm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --dm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --dm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}

@@ -1,0 +1,41 @@
+/**
+ * Hero 主题（英雄联盟风格）
+ */
+
+.theme-hero {
+  --dm-color-primary: #c89b3c;
+  --dm-color-primary-hover: #c8aa6e;
+  --dm-color-primary-light: #f0e6d3;
+  --dm-color-primary-dark: #785a28;
+
+  --dm-color-secondary: #0a323c;
+  --dm-color-secondary-hover: #0d4a59;
+
+  --dm-color-background: #010a13;
+  --dm-color-surface: #1e2328;
+  --dm-color-surface-elevated: #3c3c41;
+
+  --dm-color-border: #463714;
+  --dm-color-border-light: #5b5a56;
+
+  --dm-color-text: #f0e6d3;
+  --dm-color-text-secondary: #a09b8c;
+  --dm-color-text-muted: #5b5a56;
+
+  --dm-color-success: #0ac8b9;
+  --dm-color-warning: #c89b3c;
+  --dm-color-error: #ff4444;
+  --dm-color-info: #0397ab;
+
+  --dm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --dm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.6);
+  --dm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.7);
+
+  // Hero 特有变量
+  --dm-gradient-gold: linear-gradient(180deg, #f0e6d3 0%, #c89b3c 50%, #785a28 100%);
+  --dm-gradient-dark: linear-gradient(180deg, #1e2328 0%, #010a13 100%);
+  --dm-gradient-border: linear-gradient(90deg, transparent 0%, #c89b3c 50%, transparent 100%);
+  --dm-glow-gold: 0 0 10px rgba(200, 155, 60, 0.3), 0 0 20px rgba(200, 155, 60, 0.2);
+  --dm-glow-cyan: 0 0 10px rgba(10, 200, 185, 0.3);
+  --dm-inner-glow: inset 0 0 10px rgba(200, 155, 60, 0.1);
+}

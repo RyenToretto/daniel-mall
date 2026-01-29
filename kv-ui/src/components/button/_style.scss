@@ -1,0 +1,151 @@
+/**
+ * Button 组件样式
+ */
+
+.kv-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dm-spacing-sm);
+  border: 1px solid transparent;
+  border-radius: var(--dm-radius-md);
+  font-family: inherit;
+  font-weight: var(--dm-font-weight-medium);
+  cursor: pointer;
+  transition: all var(--dm-transition-fast) var(--dm-ease-out);
+  white-space: nowrap;
+  user-select: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--dm-color-primary);
+    outline-offset: 2px;
+  }
+
+  // 大小
+  &--sm {
+    height: 32px;
+    padding: 0 var(--dm-spacing-md);
+    font-size: var(--dm-font-size-sm);
+  }
+
+  &--md {
+    height: 40px;
+    padding: 0 var(--dm-spacing-lg);
+    font-size: var(--dm-font-size-md);
+  }
+
+  &--lg {
+    height: 48px;
+    padding: 0 var(--dm-spacing-xl);
+    font-size: var(--dm-font-size-lg);
+  }
+
+  // 类型
+  &--default {
+    background: var(--dm-color-surface);
+    border-color: var(--dm-color-border);
+    color: var(--dm-color-text);
+
+    &:hover:not(.kv-button--disabled) {
+      border-color: var(--dm-color-primary);
+      color: var(--dm-color-primary);
+    }
+  }
+
+  &--primary {
+    background: var(--dm-color-primary);
+    color: white;
+
+    &:hover:not(.kv-button--disabled) {
+      background: var(--dm-color-primary-hover);
+    }
+
+    // Hero 主题特殊样式
+    .theme-hero & {
+      background: var(--dm-gradient-gold, var(--dm-color-primary));
+      color: var(--dm-color-background);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: var(--dm-font-weight-semibold);
+
+      &:hover:not(.kv-button--disabled) {
+        box-shadow: var(--dm-glow-gold);
+      }
+    }
+  }
+
+  &--secondary {
+    background: var(--dm-color-secondary);
+    color: white;
+
+    &:hover:not(.kv-button--disabled) {
+      background: var(--dm-color-secondary-hover);
+    }
+  }
+
+  &--danger {
+    background: var(--dm-color-error);
+    color: white;
+
+    &:hover:not(.kv-button--disabled) {
+      opacity: 0.9;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: var(--dm-color-text);
+
+    &:hover:not(.kv-button--disabled) {
+      background: var(--dm-color-surface);
+    }
+  }
+
+  // 状态
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--loading {
+    cursor: wait;
+  }
+
+  &--block {
+    display: flex;
+    width: 100%;
+  }
+
+  // 子元素
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    animation: kv-spin 1s linear infinite;
+
+    circle {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 45;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: var(--dm-spacing-xs);
+  }
+}
+
+@keyframes kv-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -42,45 +42,49 @@ daniel-mall/
 
 ## 快速开始
 
-### 1. 安装社区 Skills
+### 环境要求
+
+- Node.js >= 20.0.0
+- pnpm >= 8.0.0
+- Java 21
+- MySQL 8.0
+- Redis 7.0 (可选)
+
+### 1. 安装依赖（Monorepo）
+
+```bash
+# 安装所有前端依赖
+pnpm install
+
+# 构建工具库和组件库
+pnpm build:libs
+```
+
+### 2. 初始化数据库
+
+```bash
+# 使用 MySQL 客户端执行
+mysql -u root -p < domain-server/src/main/resources/db/schema.sql
+```
+
+### 3. 启动开发服务
+
+```bash
+# 前端（http://localhost:3000）
+pnpm dev
+
+# 后端（http://localhost:8080）
+cd domain-server
+./mvnw spring-boot:run
+```
+
+### 4. 可选：安装社区 Skills
 
 ```bash
 # 安装 Vue/Nuxt 相关 Skills
 npx skills add hyf0/vue-skills --yes
 npx skills add antfu/skills --yes
 npx skills add onmax/nuxt-skills --yes
-
-# 安装设计相关 Skills
-npx skills add vercel-labs/agent-skills --yes
-npx skills add anthropics/skills --yes
-
-# 安装质量/调试 Skills
-npx skills add obra/superpowers --yes
-npx skills add wshobson/agents --yes
-```
-
-### 2. 安装依赖
-
-```bash
-# 前端
-cd daniel-web
-pnpm install
-
-# 后端
-cd domain-server
-./mvnw install
-```
-
-### 3. 启动开发服务
-
-```bash
-# 前端
-cd daniel-web
-pnpm dev
-
-# 后端
-cd domain-server
-./mvnw spring-boot:run
 ```
 
 ## 文档索引

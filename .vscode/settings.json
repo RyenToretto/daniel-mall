@@ -35,5 +35,6 @@
   "i18n-ally.localesPaths": [
     "daniel-web/locales"
   ],
-  "i18n-ally.keystyle": "nested"
+  "i18n-ally.keystyle": "nested",
+  "java.compile.nullAnalysis.mode": "automatic"
 }

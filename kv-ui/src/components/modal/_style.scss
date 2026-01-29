@@ -1,0 +1,149 @@
+/**
+ * Modal 组件样式
+ */
+
+.kv-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--dm-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--dm-spacing-md);
+
+  &__mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: var(--dm-z-modal-backdrop);
+  }
+
+  &__container {
+    position: relative;
+    z-index: var(--dm-z-modal);
+    width: 100%;
+    max-height: calc(100vh - var(--dm-spacing-2xl));
+    background: var(--dm-color-surface);
+    border-radius: var(--dm-radius-lg);
+    box-shadow: var(--dm-shadow-xl);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .theme-hero & {
+      border: 1px solid var(--dm-color-border);
+      box-shadow: var(--dm-glow-gold);
+    }
+  }
+
+  // 大小
+  &--sm .kv-modal__container {
+    max-width: 400px;
+  }
+
+  &--md .kv-modal__container {
+    max-width: 560px;
+  }
+
+  &--lg .kv-modal__container {
+    max-width: 800px;
+  }
+
+  &--xl .kv-modal__container {
+    max-width: 1140px;
+  }
+
+  &--full .kv-modal__container {
+    max-width: none;
+    width: calc(100% - var(--dm-spacing-2xl));
+    height: calc(100% - var(--dm-spacing-2xl));
+    max-height: none;
+  }
+
+  // 移动端全屏
+  @media (max-width: 640px) {
+    padding: 0;
+
+    &__container {
+      max-width: none;
+      max-height: none;
+      height: 100%;
+      border-radius: 0;
+    }
+  }
+
+  // 头部
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--dm-spacing-md) var(--dm-spacing-lg);
+    border-bottom: 1px solid var(--dm-color-border);
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: var(--dm-font-size-lg);
+    font-weight: var(--dm-font-weight-semibold);
+    color: var(--dm-color-text);
+  }
+
+  &__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--dm-color-text-secondary);
+    border-radius: var(--dm-radius-md);
+    cursor: pointer;
+    transition: all var(--dm-transition-fast);
+
+    &:hover {
+      background: var(--dm-color-surface-elevated);
+      color: var(--dm-color-text);
+    }
+  }
+
+  // 内容
+  &__body {
+    flex: 1;
+    padding: var(--dm-spacing-lg);
+    overflow-y: auto;
+  }
+
+  // 底部
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--dm-spacing-sm);
+    padding: var(--dm-spacing-md) var(--dm-spacing-lg);
+    border-top: 1px solid var(--dm-color-border);
+    flex-shrink: 0;
+  }
+}
+
+// 动画
+.kv-modal-fade-enter-active,
+.kv-modal-fade-leave-active {
+  transition: opacity var(--dm-transition-normal) var(--dm-ease-out);
+}
+
+.kv-modal-fade-enter-from,
+.kv-modal-fade-leave-to {
+  opacity: 0;
+}
+
+.kv-modal-scale-enter-active,
+.kv-modal-scale-leave-active {
+  transition: all var(--dm-transition-normal) var(--dm-ease-out);
+}
+
+.kv-modal-scale-enter-from,
+.kv-modal-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}

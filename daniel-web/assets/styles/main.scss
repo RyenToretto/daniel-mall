@@ -1,0 +1,14 @@
+/**
+ * Daniel Mall 主样式文件
+ */
+
+// 变量
+@import "./variables";
+
+// 主题
+@import "./themes/light";
+@import "./themes/dark";
+@import "./themes/hero";
+
+// 基础样式
+@import "./base";
